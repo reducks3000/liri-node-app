@@ -26,6 +26,9 @@ switch (database){
         concert()
         break
 
+    case 'do-what-it-says':
+        text()
+        break
 }
 
 function movie(){
@@ -84,3 +87,12 @@ function concert(){
         }
     });
 };
+function text(){
+    fs.readFile('random.txt', "utf8", function(err, data){
+        if (err) {
+            return console.log(err);
+        }
+    let random = data.split(",");
+    console.log(random)
+    })
+}

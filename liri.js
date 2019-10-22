@@ -1,12 +1,12 @@
 require("dotenv").config();
 const keys = require("./keys.js")
 
-const axios = require('axios')
-const moment = require('moment')
-let Spotify = require('node-spotify-api')
+const axios = require('axios');
+const moment = require('moment');
+let Spotify = require("node-spotify-api");
 let fs = require("fs");
 
-let spotify = new Spotify(keys.spotify)
+let spotify = new Spotify(keys.spotify);
 
 
 let database = process.argv[2]
@@ -14,9 +14,18 @@ let search = process.argv.slice(3).join('+')
 
 switch (database){
 
-   case 'movie-this': 
-    movie()
-    break
+    case 'movie-this': 
+        movie()
+        break
+
+    case 'spotify-this-song':
+        song()
+        break
+    
+    case 'concert-this':
+        concert()
+        break
+
 }
 
 function movie(){
@@ -25,7 +34,7 @@ function movie(){
   } else {
     let movieUrl = 'http://www.omdbapi.com/?apikey=trilogy&t=' +search
           axios({ 
-              method: 'get',
+              method: 'GET',
               url: movieUrl,
             })
             .then(function (response) {
@@ -42,12 +51,21 @@ function movie(){
               console.log('---------------------')
             })
   }            
-}
-    
-    switch (database){
-    
-       case 'movie-this': 
-        movie()
-        break
-
+};
+function song(){   
+    if (search === "") {
+      search = 'the sign ace of base'
     }
+    spotify.search({ type: 'track', query: search }, function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+    console.log('-------------------------------')
+    console.log('Artist: ' + data.tracks.items[0].artists[0].name + '\n')
+    console.log('Song: ' + data.tracks.items[0].name + '\n')
+    console.log('Link: ' + data.tracks.items[0].preview_url + '\n')
+    console.log('Album: ' + data.tracks.items[0].album.name + '\n')
+    console.log('-------------------------------')
+  })
+};
+

@@ -68,4 +68,19 @@ function song(){
     console.log('-------------------------------')
   })
 };
+function concert(){
+    let bands = 'https://rest.bandsintown.com/artists/' + search + '/events?app_id=1e140eabdce95250b1ad6075934a113d'
 
+    axios({
+        method: 'GET',
+        url: bands,
+    })
+    .then(function(response) {
+        for (let i=0; i < response.data.length; i++) {
+            console.log(response.data[i].venue.name) 
+            console.log(response.data[i].venue.city)
+            console.log(moment(response.data[i].datetime).format('MM/DD/YYYY'))
+            console.log('-----------------')
+        }
+    });
+};

@@ -84,6 +84,11 @@ function concert(){
             console.log(response.data[i].venue.city)
             console.log(moment(response.data[i].datetime).format('MM/DD/YYYY'))
             console.log('-----------------')
+            // fs.appendFileSync("log.txt", "Date: " + response + "\n---------\n", function(error) {
+            //     if (error) {
+            //         console.log(error);
+            //     };
+            // })
         }
     });
 };

@@ -16,19 +16,19 @@ switch (database){
 
     case 'movie-this': 
         movie()
-        break
+        break;
 
     case 'spotify-this-song':
         song()
-        break
+        break;
     
     case 'concert-this':
         concert()
-        break
+        break;
 
     case 'do-what-it-says':
         text()
-        break
+        break;
 }
 
 function movie(){
